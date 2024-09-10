@@ -25,7 +25,6 @@ const Dashboard: React.FC = () => {
         const response = await fetch("http://localhost:3002/api/dashboards");
         const result = await response.json();
 
-        console.log("francys result: ", result);
         if (response.status === HttpStatus.OK) {
           const {
             totalOfFarms,

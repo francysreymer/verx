@@ -1,10 +1,13 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import HttpStatus from "http-status-codes";
+//import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+//import HttpStatus from "http-status-codes";
 import Link from "next/link";
 import Menu from "@/components/menu";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, AppDispatch, fetchFarms, deleteFarm } from "@/redux/store";
 
-type CropType = "Soja" | "Milho" | "Algodão" | "Café" | "Cana de Açúcar";
+/*type CropType = "Soja" | "Milho" | "Algodão" | "Café" | "Cana de Açúcar";
 
 type Farm = {
   id: string;
@@ -17,10 +20,10 @@ type Farm = {
   cultivable_area: number;
   vegetation_area: number;
   crops: CropType[];
-};
+};*/
 
 export default function Index() {
-  const [farms, setFarms] = useState<Farm[]>([]);
+  /*const [farms, setFarms] = useState<Farm[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -56,6 +59,17 @@ export default function Index() {
     } catch (err) {
       setError("An error occurred while deleting the farm.");
     }
+  };*/
+
+  const dispatch = useDispatch<AppDispatch>();
+  const { farms, error } = useSelector((state: RootState) => state.farms);
+
+  useEffect(() => {
+    dispatch(fetchFarms());
+  }, [dispatch]);
+
+  const handleDelete = (id: string) => {
+    dispatch(deleteFarm(id));
   };
 
   return (
