@@ -1,66 +1,11 @@
 "use client";
-//import React, { useEffect, useState } from "react";
 import React, { useEffect } from "react";
-//import HttpStatus from "http-status-codes";
 import Link from "next/link";
 import Menu from "@/components/menu";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch, fetchFarms, deleteFarm } from "@/redux/store";
 
-/*type CropType = "Soja" | "Milho" | "Algodão" | "Café" | "Cana de Açúcar";
-
-type Farm = {
-  id: string;
-  document: string;
-  producer_name: string;
-  farm_name: string;
-  city: string;
-  state: string;
-  total_area: number;
-  cultivable_area: number;
-  vegetation_area: number;
-  crops: CropType[];
-};*/
-
 export default function Index() {
-  /*const [farms, setFarms] = useState<Farm[]>([]);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchFarms = async () => {
-      try {
-        const response = await fetch("http://localhost:3002/api/farms");
-        const data = await response.json();
-        if (response.status === HttpStatus.OK) {
-          setFarms(data);
-        } else {
-          setError(data.message || "Failed to fetch farms.");
-        }
-      } catch (err) {
-        setError("An error occurred while fetching farms.");
-      }
-    };
-
-    fetchFarms();
-  }, []);
-
-  const handleDelete = async (id: string) => {
-    try {
-      const response = await fetch(`http://localhost:3002/api/farms/${id}`, {
-        method: "DELETE",
-      });
-
-      if (response.status === HttpStatus.NO_CONTENT) {
-        setFarms((prevFarms) => prevFarms.filter((farm) => farm.id !== id));
-      } else {
-        const data = await response.json();
-        setError(data.message || "Failed to delete farm.");
-      }
-    } catch (err) {
-      setError("An error occurred while deleting the farm.");
-    }
-  };*/
-
   const dispatch = useDispatch<AppDispatch>();
   const { farms, error } = useSelector((state: RootState) => state.farms);
 
