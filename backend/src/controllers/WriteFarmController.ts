@@ -6,6 +6,7 @@ import { ReadFarmRepository } from "~/repositories/ReadFarmRepository";
 import { Farm } from "~/entities/Farm";
 import { farmSchema } from "~/schemas/farmSchema";
 import { StatusCodes } from "http-status-codes";
+import createError from "http-errors";
 
 // Instanciando o repositório e o serviço manualmente
 export const farmRepository = AppDataSource.getRepository(Farm);
@@ -52,9 +53,13 @@ export class WriteFarmController {
       const updated = await writeFarmService.updateFarm(farm, Number(id));
       return res.status(StatusCodes.OK).json(updated);
     } catch (error: Error | any) {
-      return res
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({ message: error.message });
+      if (error instanceof createError.HttpError) {
+        return res.status(error.status).json({ message: error.message });
+      } else {
+        return res
+          .status(StatusCodes.INTERNAL_SERVER_ERROR)
+          .json({ message: error.message });
+      }
     }
   }
 
@@ -64,9 +69,13 @@ export class WriteFarmController {
       await writeFarmService.deleteFarm(Number(id));
       return res.status(StatusCodes.NO_CONTENT).send();
     } catch (error: Error | any) {
-      return res
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({ message: error.message });
+      if (error instanceof createError.HttpError) {
+        return res.status(error.status).json({ message: error.message });
+      } else {
+        return res
+          .status(StatusCodes.INTERNAL_SERVER_ERROR)
+          .json({ message: error.message });
+      }
     }
   }
 }

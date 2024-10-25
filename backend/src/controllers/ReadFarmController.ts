@@ -4,6 +4,7 @@ import { ReadFarmService } from "~/services/ReadFarmService";
 import { ReadFarmRepository } from "~/repositories/ReadFarmRepository";
 import { Farm } from "~/entities/Farm";
 import { StatusCodes } from "http-status-codes";
+import createError from "http-errors";
 
 // Instanciando o repositório e o serviço manualmente
 export const farmRepository = AppDataSource.getRepository(Farm);
@@ -28,9 +29,13 @@ export class ReadFarmController {
       const farm = await readFarmService.getFarmById(Number(id));
       return res.status(StatusCodes.OK).json(farm);
     } catch (error: Error | any) {
-      return res
-        .status(StatusCodes.INTERNAL_SERVER_ERROR)
-        .json({ message: error.message });
+      if (error instanceof createError.HttpError) {
+        return res.status(error.status).json({ message: error.message });
+      } else {
+        return res
+          .status(StatusCodes.INTERNAL_SERVER_ERROR)
+          .json({ message: error.message });
+      }
     }
   }
 
