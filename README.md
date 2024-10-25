@@ -48,7 +48,7 @@ The backend is accessible at `http://localhost:3002`.
 4. **Run Docker containers:**
 
     ```bash
-    docker-compose up -d
+    docker compose up -d
     ```
 
 5. **Start the backend server:**
