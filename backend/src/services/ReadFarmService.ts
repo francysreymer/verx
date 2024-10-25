@@ -10,20 +10,20 @@ export class ReadFarmService implements IReadFarmService {
     this.readFarmRepository = readFarmRepository;
   }
 
-  getFarms = async (): Promise<Farm[]> => {
+  async getFarms(): Promise<Farm[]> {
     return await this.readFarmRepository.findAll();
-  };
+  }
 
-  getFarmById = async (id: number): Promise<Farm | null> => {
+  async getFarmById(id: number): Promise<Farm | null> {
     const farm = await this.readFarmRepository.findOneById(id);
     if (!farm) {
       throw new createError.NotFound("Farm not found");
     }
 
     return farm;
-  };
+  }
 
-  getFarmDashboards = async (): Promise<any> => {
+  async getFarmDashboards(): Promise<any> {
     const [
       totalOfFarms,
       totalArea,
@@ -45,5 +45,5 @@ export class ReadFarmService implements IReadFarmService {
       percentageByCropType,
       percentageByLandUse,
     };
-  };
+  }
 }
