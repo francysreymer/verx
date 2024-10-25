@@ -26,12 +26,6 @@ export class ReadFarmController {
     try {
       const { id } = req.params;
       const farm = await readFarmService.getFarmById(Number(id));
-      if (!farm) {
-        return res
-          .status(StatusCodes.NOT_FOUND)
-          .json({ message: "Farm not found" });
-      }
-
       return res.status(StatusCodes.OK).json(farm);
     } catch (error: Error | any) {
       return res

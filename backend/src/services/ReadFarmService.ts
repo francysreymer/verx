@@ -1,6 +1,7 @@
 import { Farm } from "~/entities/Farm";
 import IReadFarmRepository from "~/contracts/IReadFarmRepository";
 import IReadFarmService from "~/contracts/IReadFarmService";
+import createError from "http-errors";
 
 export class ReadFarmService implements IReadFarmService {
   private readFarmRepository: IReadFarmRepository;
@@ -9,15 +10,20 @@ export class ReadFarmService implements IReadFarmService {
     this.readFarmRepository = readFarmRepository;
   }
 
-  async getFarms(): Promise<Farm[]> {
+  getFarms = async (): Promise<Farm[]> => {
     return await this.readFarmRepository.findAll();
-  }
+  };
 
-  async getFarmById(id: number): Promise<Farm | null> {
-    return await this.readFarmRepository.findOneById(id);
-  }
+  getFarmById = async (id: number): Promise<Farm | null> => {
+    const farm = await this.readFarmRepository.findOneById(id);
+    if (!farm) {
+      throw new createError.NotFound("Farm not found");
+    }
 
-  async getFarmDashboards(): Promise<any> {
+    return farm;
+  };
+
+  getFarmDashboards = async (): Promise<any> => {
     const [
       totalOfFarms,
       totalArea,
@@ -39,5 +45,5 @@ export class ReadFarmService implements IReadFarmService {
       percentageByCropType,
       percentageByLandUse,
     };
-  }
+  };
 }
