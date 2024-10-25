@@ -78,12 +78,12 @@ The backend should now be running at [http://localhost:3002](http://localhost:30
     npm run dev
     ```
 
-The frontend should now be running at [http://localhost:3000](http://localhost:3000).
+The frontend should now be running at [http://localhost:3000/farms](http://localhost:3000/farms).
 
 ## Usage
 
 - **Backend:** Accessible at `http://localhost:3002/api`.
-- **Frontend:** Accessible at `http://localhost:3000`.
+- **Frontend:** Accessible at `http://localhost:3000/farms`.
 
 ## Features
 
