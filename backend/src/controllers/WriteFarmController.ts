@@ -6,6 +6,7 @@ import { WriteFarmRepository } from "~/repositories/WriteFarmRepository";
 import { ReadFarmRepository } from "~/repositories/ReadFarmRepository";
 import { Farm } from "~/entities/Farm";
 import { farmSchema } from "~/schemas/farmSchema";
+import { StatusCodes } from "http-status-codes";
 
 // Instanciando o repositório e o serviço manualmente
 export const farmRepository = AppDataSource.getRepository(Farm);
@@ -21,13 +22,17 @@ export class WriteFarmController {
 
       const { error } = farmSchema.validate(farm);
       if (error) {
-        return res.status(400).json({ message: error.details[0].message });
+        return res
+          .status(StatusCodes.BAD_REQUEST)
+          .json({ message: error.details[0].message });
       }
 
       const created = await writeFarmService.createFarm(farm);
-      return res.status(201).json(created);
+      return res.status(StatusCodes.CREATED).json(created);
     } catch (error: Error | any) {
-      return res.status(500).json({ message: error.message });
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: error.message });
     }
   }
 
@@ -38,18 +43,24 @@ export class WriteFarmController {
 
       const findFarm = await readFarmService.getFarmById(Number(id));
       if (!findFarm) {
-        return res.status(404).json({ message: "Farm not found" });
+        return res
+          .status(StatusCodes.NOT_FOUND)
+          .json({ message: "Farm not found" });
       }
 
       const { error } = farmSchema.validate(farm);
       if (error) {
-        return res.status(400).json({ message: error.details[0].message });
+        return res
+          .status(StatusCodes.BAD_REQUEST)
+          .json({ message: error.details[0].message });
       }
 
       const updated = await writeFarmService.updateFarm(farm, Number(id));
-      return res.status(200).json(updated);
+      return res.status(StatusCodes.OK).json(updated);
     } catch (error: Error | any) {
-      return res.status(500).json({ message: error.message });
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: error.message });
     }
   }
 
@@ -59,13 +70,17 @@ export class WriteFarmController {
 
       const farm = await readFarmService.getFarmById(Number(id));
       if (!farm) {
-        return res.status(404).json({ message: "Farm not found" });
+        return res
+          .status(StatusCodes.NOT_FOUND)
+          .json({ message: "Farm not found" });
       }
 
       const deleted = await writeFarmService.deleteFarm(Number(id));
-      return res.status(204).send();
+      return res.status(StatusCodes.NO_CONTENT).send();
     } catch (error: Error | any) {
-      return res.status(500).json({ message: error.message });
+      return res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .json({ message: error.message });
     }
   }
 }
