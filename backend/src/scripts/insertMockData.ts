@@ -1,7 +1,7 @@
-import { AppDataSource } from "~/config/database";
-import { Farm } from "~/entities/Farm";
+import { AppDataSource } from "@/config/database";
+import { Farm } from "@/entities/Farm";
 import { DeepPartial } from "typeorm";
-import { CropType } from "~/entities/Farm"; // Adjust the import path as necessary
+import { CropType } from "@/entities/Farm"; // Adjust the import path as necessary
 
 export async function insertMockData() {
   const farmRepository = AppDataSource.getRepository(Farm);

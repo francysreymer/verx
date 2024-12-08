@@ -1,6 +1,6 @@
-import { Farm } from "~/entities/Farm";
-import IReadFarmRepository from "~/contracts/IReadFarmRepository";
-import IReadFarmService from "~/contracts/IReadFarmService";
+import { Farm } from "@/entities/Farm";
+import IReadFarmRepository from "@/contracts/IReadFarmRepository";
+import IReadFarmService from "@/contracts/IReadFarmService";
 import createError from "http-errors";
 
 export class ReadFarmService implements IReadFarmService {

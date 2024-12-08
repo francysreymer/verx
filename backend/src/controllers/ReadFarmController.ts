@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { AppDataSource } from "~/config/database";
-import { ReadFarmService } from "~/services/ReadFarmService";
-import { ReadFarmRepository } from "~/repositories/ReadFarmRepository";
-import { Farm } from "~/entities/Farm";
+import { AppDataSource } from "@/config/database";
+import { ReadFarmService } from "@/services/ReadFarmService";
+import { ReadFarmRepository } from "@/repositories/ReadFarmRepository";
+import { Farm } from "@/entities/Farm";
 import { StatusCodes } from "http-status-codes";
 import createError from "http-errors";
 

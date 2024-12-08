@@ -1,10 +1,10 @@
 import "reflect-metadata";
 import express from "express";
-import { AppDataSource } from "~/config/database";
-import router from "~/routes/farmRoutes";
-import { insertMockData } from "~/scripts/insertMockData";
+import { AppDataSource } from "@/config/database";
+import router from "@/routes/farmRoutes";
+import { insertMockData } from "@/scripts/insertMockData";
 import swaggerUi from "swagger-ui-express";
-import { swaggerDocs } from "~/swagger/swaggerDocs";
+import { swaggerDocs } from "@/swagger/swaggerDocs";
 import cors from "cors";
 
 const app = express();

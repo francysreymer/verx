@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
-import { Farm } from "~/entities/Farm";
-import IWriteFarmRepository from "~/contracts/IWriteFarmRepository";
-//import { AppDataSource } from "~/config/database";
+import { Farm } from "@/entities/Farm";
+import IWriteFarmRepository from "@/contracts/IWriteFarmRepository";
+//import { AppDataSource } from "@/config/database";
 
 export class WriteFarmRepository implements IWriteFarmRepository {
   private repository: Repository<Farm>;

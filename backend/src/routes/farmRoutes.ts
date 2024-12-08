@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { ReadFarmController } from "~/controllers/ReadFarmController";
-import { WriteFarmController } from "~/controllers/WriteFarmController";
+import { ReadFarmController } from "@/controllers/ReadFarmController";
+import { WriteFarmController } from "@/controllers/WriteFarmController";
 
 const router = Router();
 

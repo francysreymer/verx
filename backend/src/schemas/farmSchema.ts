@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { CropType } from "~/entities/Farm";
+import { CropType } from "@/entities/Farm";
 
 export const farmSchema = Joi.object({
   document: Joi.string().max(18).required(),

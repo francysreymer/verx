@@ -1,6 +1,6 @@
 import { Repository } from "typeorm";
-import { Farm } from "~/entities/Farm";
-import IReadFarmRepository from "~/contracts/IReadFarmRepository";
+import { Farm } from "@/entities/Farm";
+import IReadFarmRepository from "@/contracts/IReadFarmRepository";
 
 export class ReadFarmRepository implements IReadFarmRepository {
   private repository: Repository<Farm>;

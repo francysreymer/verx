@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { AppDataSource } from "~/config/database";
-import { WriteFarmService } from "~/services/WriteFarmService";
-import { WriteFarmRepository } from "~/repositories/WriteFarmRepository";
-import { ReadFarmRepository } from "~/repositories/ReadFarmRepository";
-import { Farm } from "~/entities/Farm";
-import { farmSchema } from "~/schemas/farmSchema";
+import { AppDataSource } from "@/config/database";
+import { WriteFarmService } from "@/services/WriteFarmService";
+import { WriteFarmRepository } from "@/repositories/WriteFarmRepository";
+import { ReadFarmRepository } from "@/repositories/ReadFarmRepository";
+import { Farm } from "@/entities/Farm";
+import { farmSchema } from "@/schemas/farmSchema";
 import { StatusCodes } from "http-status-codes";
 import createError from "http-errors";
 
