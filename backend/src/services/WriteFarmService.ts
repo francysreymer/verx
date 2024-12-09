@@ -1,8 +1,10 @@
-import { Farm } from "@/entities/Farm";
-import IWriteFarmRepository from "@/contracts/IWriteFarmRepository";
-import IWriteFarmService from "@/contracts/IWriteFarmService";
-import IReadFarmRepository from "@/contracts/IReadFarmRepository";
-import createError from "http-errors";
+import createError from 'http-errors';
+
+import IReadFarmRepository from '@/contracts/IReadFarmRepository';
+import IWriteFarmRepository from '@/contracts/IWriteFarmRepository';
+import IWriteFarmService from '@/contracts/IWriteFarmService';
+import { Farm } from '@/entities/Farm';
+
 
 export class WriteFarmService implements IWriteFarmService {
   private writeFarmRepository: IWriteFarmRepository;
@@ -10,7 +12,7 @@ export class WriteFarmService implements IWriteFarmService {
 
   constructor(
     writeFarmRepository: IWriteFarmRepository,
-    readFarmRepository: IReadFarmRepository
+    readFarmRepository: IReadFarmRepository,
   ) {
     this.writeFarmRepository = writeFarmRepository;
     this.readFarmRepository = readFarmRepository;
@@ -23,7 +25,7 @@ export class WriteFarmService implements IWriteFarmService {
   async updateFarm(farm: Farm, id: number): Promise<Farm> {
     const findFarm = await this.readFarmRepository.findOneById(id);
     if (!findFarm) {
-      throw new createError.NotFound("Farm not found");
+      throw new createError.NotFound('Farm not found');
     }
 
     return await this.writeFarmRepository.save(farm, id);
@@ -32,7 +34,7 @@ export class WriteFarmService implements IWriteFarmService {
   async deleteFarm(id: number): Promise<boolean> {
     const findFarm = await this.readFarmRepository.findOneById(id);
     if (!findFarm) {
-      throw new createError.NotFound("Farm not found");
+      throw new createError.NotFound('Farm not found');
     }
 
     return await this.writeFarmRepository.delete(id);

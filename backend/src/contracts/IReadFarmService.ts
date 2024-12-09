@@ -1,7 +1,8 @@
-import { Farm } from "@/entities/Farm";
+import { FarmDashboard } from '@/common/FarmDashboard';
+import { Farm } from '@/entities/Farm';
 
 export default interface IReadFarmService {
   getFarms(): Promise<Farm[]>;
   getFarmById(id: number): Promise<Farm | null>;
-  getFarmDashboards(): Promise<any>;
+  getFarmDashboards(): Promise<FarmDashboard>;
 }

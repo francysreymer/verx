@@ -1,6 +1,10 @@
-import { Repository } from "typeorm";
-import { Farm } from "@/entities/Farm";
-import IReadFarmRepository from "@/contracts/IReadFarmRepository";
+import { Repository } from 'typeorm';
+
+import { PercentageByCropType } from '@/common/PercentageByCropType';
+import { PercentageByLandUse } from '@/common/PercentageByLandUse';
+import { PercentageByState } from '@/common/PercentageByState';
+import IReadFarmRepository from '@/contracts/IReadFarmRepository';
+import { Farm } from '@/entities/Farm';
 
 export class ReadFarmRepository implements IReadFarmRepository {
   private repository: Repository<Farm>;
@@ -19,8 +23,8 @@ export class ReadFarmRepository implements IReadFarmRepository {
 
   async getTotalOfFarms(): Promise<number> {
     const result = await this.repository
-      .createQueryBuilder("farms")
-      .select("COUNT(farms.id)", "total_farms")
+      .createQueryBuilder('farms')
+      .select('COUNT(farms.id)', 'total_farms')
       .getRawOne();
 
     return parseFloat(result.total_farms) || 0;
@@ -28,26 +32,26 @@ export class ReadFarmRepository implements IReadFarmRepository {
 
   async getTotalArea(): Promise<number> {
     const result = await this.repository
-      .createQueryBuilder("farms")
-      .select("SUM(farms.total_area)", "total_area")
+      .createQueryBuilder('farms')
+      .select('SUM(farms.total_area)', 'total_area')
       .getRawOne();
 
     return parseFloat(result.total_area) || 0;
   }
 
-  async getPercentageByState(): Promise<any> {
+  async getPercentageByState(): Promise<PercentageByState[]> {
     // Count the number of farms for each state
     const farmCountByState = await this.repository
-      .createQueryBuilder("farms")
-      .select("farms.state", "state")
-      .addSelect("COUNT(farms.id)", "farm_count")
-      .groupBy("farms.state")
+      .createQueryBuilder('farms')
+      .select('farms.state', 'state')
+      .addSelect('COUNT(farms.id)', 'farm_count')
+      .groupBy('farms.state')
       .getRawMany();
 
     // Count the overall number of farms
     const overallFarmCount = await this.repository
-      .createQueryBuilder("farms")
-      .select("COUNT(farms.id)", "total_farms")
+      .createQueryBuilder('farms')
+      .select('COUNT(farms.id)', 'total_farms')
       .getRawOne();
 
     // Calculate percentage for each state
@@ -63,19 +67,19 @@ export class ReadFarmRepository implements IReadFarmRepository {
     return percentages;
   }
 
-  async getPercentageByCropType(): Promise<any> {
+  async getPercentageByCropType(): Promise<PercentageByCropType[]> {
     // Fetch total area for each type of crop
     const farmCountByCrop = await this.repository
-      .createQueryBuilder("farms")
-      .select("unnest(farms.crops)", "crop")
-      .addSelect("COUNT(DISTINCT farms.id)", "farm_count")
-      .groupBy("crop")
+      .createQueryBuilder('farms')
+      .select('unnest(farms.crops)', 'crop')
+      .addSelect('COUNT(DISTINCT farms.id)', 'farm_count')
+      .groupBy('crop')
       .getRawMany();
 
     // Count the overall number of farms
     const overallFarmCount = await this.repository
-      .createQueryBuilder("farms")
-      .select("COUNT(DISTINCT farms.id)", "total_farms")
+      .createQueryBuilder('farms')
+      .select('COUNT(DISTINCT farms.id)', 'total_farms')
       .getRawOne();
 
     // Calculate percentage for each type of crop
@@ -91,17 +95,17 @@ export class ReadFarmRepository implements IReadFarmRepository {
     return percentages;
   }
 
-  async getPercentageByLandUse(): Promise<any> {
+  async getPercentageByLandUse(): Promise<PercentageByLandUse[]> {
     // Fetch total cultivable area
     const totalCultivableArea = await this.repository
-      .createQueryBuilder("farms")
-      .select("SUM(farms.cultivable_area)", "total_cultivable_area")
+      .createQueryBuilder('farms')
+      .select('SUM(farms.cultivable_area)', 'total_cultivable_area')
       .getRawOne();
 
     // Fetch total vegetation area
     const totalVegetationArea = await this.repository
-      .createQueryBuilder("farms")
-      .select("SUM(farms.vegetation_area)", "total_vegetation_area")
+      .createQueryBuilder('farms')
+      .select('SUM(farms.vegetation_area)', 'total_vegetation_area')
       .getRawOne();
 
     // Calculate overall total area
@@ -122,11 +126,11 @@ export class ReadFarmRepository implements IReadFarmRepository {
     // Return the results
     return [
       {
-        land_type: "Área Cultivável",
+        land_type: 'Área Cultivável',
         percentage: parseFloat(cultivablePercentage.toFixed(2)), // Format to 2 decimal places
       },
       {
-        land_type: "Área de Vegetação",
+        land_type: 'Área de Vegetação',
         percentage: parseFloat(vegetationPercentage.toFixed(2)), // Format to 2 decimal places
       },
     ];

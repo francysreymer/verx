@@ -1,4 +1,4 @@
-import { Farm } from "@/entities/Farm";
+import { Farm } from '@/entities/Farm';
 
 export default interface IWriteFarmService {
   createFarm(farm: Farm): Promise<Farm>;

@@ -1,7 +1,9 @@
-import { Farm } from "@/entities/Farm";
-import IReadFarmRepository from "@/contracts/IReadFarmRepository";
-import IReadFarmService from "@/contracts/IReadFarmService";
-import createError from "http-errors";
+import createError from 'http-errors';
+
+import { FarmDashboard } from '@/common/FarmDashboard';
+import IReadFarmRepository from '@/contracts/IReadFarmRepository';
+import IReadFarmService from '@/contracts/IReadFarmService';
+import { Farm } from '@/entities/Farm';
 
 export class ReadFarmService implements IReadFarmService {
   private readFarmRepository: IReadFarmRepository;
@@ -17,13 +19,13 @@ export class ReadFarmService implements IReadFarmService {
   async getFarmById(id: number): Promise<Farm | null> {
     const farm = await this.readFarmRepository.findOneById(id);
     if (!farm) {
-      throw new createError.NotFound("Farm not found");
+      throw new createError.NotFound('Farm not found');
     }
 
     return farm;
   }
 
-  async getFarmDashboards(): Promise<any> {
+  async getFarmDashboards(): Promise<FarmDashboard> {
     const [
       totalOfFarms,
       totalArea,

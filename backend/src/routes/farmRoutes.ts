@@ -1,6 +1,7 @@
-import { Router } from "express";
-import { ReadFarmController } from "@/controllers/ReadFarmController";
-import { WriteFarmController } from "@/controllers/WriteFarmController";
+import { Router } from 'express';
+
+import { ReadFarmController } from '@/controllers/ReadFarmController';
+import { WriteFarmController } from '@/controllers/WriteFarmController';
 
 const router = Router();
 
@@ -50,7 +51,7 @@ const router = Router();
  *                       type: string
  *                     example: ["Soja", "Milho"]
  */
-router.get("/farms", new ReadFarmController().getFarms);
+router.get('/farms', new ReadFarmController().getFarms);
 
 /**
  * @swagger
@@ -107,7 +108,7 @@ router.get("/farms", new ReadFarmController().getFarms);
  *       500:
  *         description: Internal server error.
  */
-router.get("/farms/:id", new ReadFarmController().getFarmById);
+router.get('/farms/:id', new ReadFarmController().getFarmById);
 
 /**
  * @swagger
@@ -196,7 +197,7 @@ router.get("/farms/:id", new ReadFarmController().getFarmById);
  *       500:
  *         description: Internal server error.
  */
-router.post("/farms", new WriteFarmController().createFarm);
+router.post('/farms', new WriteFarmController().createFarm);
 
 /**
  * @swagger
@@ -294,7 +295,7 @@ router.post("/farms", new WriteFarmController().createFarm);
  *       500:
  *         description: Internal server error.
  */
-router.put("/farms/:id", new WriteFarmController().updateFarm);
+router.put('/farms/:id', new WriteFarmController().updateFarm);
 
 /**
  * @swagger
@@ -317,7 +318,7 @@ router.put("/farms/:id", new WriteFarmController().updateFarm);
  *       500:
  *         description: Internal server error.
  */
-router.delete("/farms/:id", new WriteFarmController().deleteFarm);
+router.delete('/farms/:id', new WriteFarmController().deleteFarm);
 
 /**
  * @swagger
@@ -378,6 +379,6 @@ router.delete("/farms/:id", new WriteFarmController().deleteFarm);
  *       500:
  *         description: Internal server error.
  */
-router.get("/dashboards", new ReadFarmController().getFarmDashboards);
+router.get('/dashboards', new ReadFarmController().getFarmDashboards);
 
 export default router;
