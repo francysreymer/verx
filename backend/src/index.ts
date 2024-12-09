@@ -5,7 +5,7 @@ import swaggerUi from 'swagger-ui-express';
 
 import { db } from '@/config/db';
 import { swaggerDocs } from '@/config/swaggerDocs';
-import router from '@/routes/farmRoutes';
+import farmRoutes from '@/routes/farmRoutes';
 import { insertMockData } from '@/scripts/insertMockData';
 
 const app = express();
@@ -18,14 +18,15 @@ app.use(
     allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
   }),
 );
-app.use('/api', router);
+app.use('/api', farmRoutes);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3002;
 
 (async () => {
   try {
     await db.initialize();
+
     // Insert mock data
     await insertMockData();
 

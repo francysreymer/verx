@@ -3,7 +3,9 @@ import { Router } from 'express';
 import { ReadFarmController } from '@/controllers/ReadFarmController';
 import { WriteFarmController } from '@/controllers/WriteFarmController';
 
-const router = Router();
+const farmRoutes = Router();
+const readFarmController = new ReadFarmController();
+const writeFarmController = new WriteFarmController();
 
 /**
  * @swagger
@@ -51,7 +53,9 @@ const router = Router();
  *                       type: string
  *                     example: ["Soja", "Milho"]
  */
-router.get('/farms', new ReadFarmController().getFarms);
+farmRoutes.get('/farms', async (req, res) => {
+  await readFarmController.getFarms(req, res);
+});
 
 /**
  * @swagger
@@ -108,7 +112,9 @@ router.get('/farms', new ReadFarmController().getFarms);
  *       500:
  *         description: Internal server error.
  */
-router.get('/farms/:id', new ReadFarmController().getFarmById);
+farmRoutes.get('/farms/:id', async (req, res) => {
+  await readFarmController.getFarmById(req, res);
+});
 
 /**
  * @swagger
@@ -197,7 +203,9 @@ router.get('/farms/:id', new ReadFarmController().getFarmById);
  *       500:
  *         description: Internal server error.
  */
-router.post('/farms', new WriteFarmController().createFarm);
+farmRoutes.get('/farms', async (req, res) => {
+  await writeFarmController.createFarm(req, res);
+});
 
 /**
  * @swagger
@@ -295,7 +303,9 @@ router.post('/farms', new WriteFarmController().createFarm);
  *       500:
  *         description: Internal server error.
  */
-router.put('/farms/:id', new WriteFarmController().updateFarm);
+farmRoutes.get('/farms/:id', async (req, res) => {
+  await writeFarmController.updateFarm(req, res);
+});
 
 /**
  * @swagger
@@ -318,7 +328,9 @@ router.put('/farms/:id', new WriteFarmController().updateFarm);
  *       500:
  *         description: Internal server error.
  */
-router.delete('/farms/:id', new WriteFarmController().deleteFarm);
+farmRoutes.get('/farms/:id', async (req, res) => {
+  await writeFarmController.deleteFarm(req, res);
+});
 
 /**
  * @swagger
@@ -379,6 +391,8 @@ router.delete('/farms/:id', new WriteFarmController().deleteFarm);
  *       500:
  *         description: Internal server error.
  */
-router.get('/dashboards', new ReadFarmController().getFarmDashboards);
+farmRoutes.get('/dashboards', async (req, res) => {
+  await readFarmController.getFarmDashboards(req, res);
+});
 
-export default router;
+export default farmRoutes;
