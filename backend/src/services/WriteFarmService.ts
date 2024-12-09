@@ -32,7 +32,6 @@ export class WriteFarmService implements IWriteFarmService {
 
   async deleteFarm(id: number): Promise<boolean> {
     const findFarm = await this.readFarmRepository.findOneById(id);
-    console.log('findFarm: ', findFarm);
     if (!findFarm) {
       throw new createError.NotFound('Farm not found');
     }
