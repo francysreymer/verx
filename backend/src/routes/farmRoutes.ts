@@ -203,7 +203,7 @@ farmRoutes.get('/farms/:id', async (req, res) => {
  *       500:
  *         description: Internal server error.
  */
-farmRoutes.get('/farms', async (req, res) => {
+farmRoutes.post('/farms', async (req, res) => {
   await writeFarmController.createFarm(req, res);
 });
 
@@ -303,7 +303,7 @@ farmRoutes.get('/farms', async (req, res) => {
  *       500:
  *         description: Internal server error.
  */
-farmRoutes.get('/farms/:id', async (req, res) => {
+farmRoutes.put('/farms/:id', async (req, res) => {
   await writeFarmController.updateFarm(req, res);
 });
 
@@ -328,7 +328,7 @@ farmRoutes.get('/farms/:id', async (req, res) => {
  *       500:
  *         description: Internal server error.
  */
-farmRoutes.get('/farms/:id', async (req, res) => {
+farmRoutes.delete('/farms/:id', async (req, res) => {
   await writeFarmController.deleteFarm(req, res);
 });
 

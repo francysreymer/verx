@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 
+import { formatErrors } from '@/common/formatErrors';
 import { handleHttpError } from '@/common/handleHttpError';
 import { db } from '@/config/db';
 import { Farm } from '@/entities/Farm';
@@ -25,9 +26,7 @@ export class WriteFarmController {
 
       const { error } = farmSchema.validate(farm);
       if (error) {
-        return res
-          .status(StatusCodes.BAD_REQUEST)
-          .json({ message: error.details[0].message });
+        return res.status(StatusCodes.BAD_REQUEST).json(formatErrors(error));
       }
 
       const created = await writeFarmService.createFarm(farm);
@@ -44,9 +43,7 @@ export class WriteFarmController {
 
       const { error } = farmSchema.validate(farm);
       if (error) {
-        return res
-          .status(StatusCodes.BAD_REQUEST)
-          .json({ message: error.details[0].message });
+        return res.status(StatusCodes.BAD_REQUEST).json(formatErrors(error));
       }
 
       const updated = await writeFarmService.updateFarm(farm, Number(id));
